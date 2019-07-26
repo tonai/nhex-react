@@ -1,0 +1,69 @@
+import React, { FC } from 'react';
+
+import { getArray } from '../../services';
+
+import { Cell } from '../Cell';
+
+import './styles.css';
+
+interface Props {
+  cols: number
+  hex?: boolean
+  margin?: number
+  oddEven?: boolean
+  rows?: number
+  width: number
+}
+
+const Board: FC<Props> = (props) => {
+  let { cols, hex = false, margin = 0, oddEven = false, rows, width } = props;
+  cols = hex && cols % 2 === 0 ? cols - 1 : cols;
+  rows = hex
+    ? cols % 4 === 1 ? cols : cols + 1
+    : rows ? rows : cols;
+
+  const colArray = getArray(cols);
+  const rowArrayEven = getArray(rows);
+  const rowArrayOdd = getArray(rows - 1);
+  const midColIndex = (cols + 1) / 2 - 1;
+
+  return (
+    <div className="Board" style={{
+      margin: `0 ${width / 4 - margin / 2}px`,
+      width: (width + width / 2 + margin) * cols
+    }}>
+      {colArray.map(renderCol)}
+    </div>
+  );
+
+  function renderCol(_: unknown, col: number) {
+    const isEven = col % 2 === Number(oddEven);
+    const rowArray = isEven ? rowArrayEven : rowArrayOdd;
+
+    return (
+      <div className="Board__col" key={col} style={{ margin: `0 ${width / 4 + margin / 2}px` }}>
+        {rowArray.map((_: unknown, row: number) => (
+          <div key={row} style={{ marginBottom: `${row === rowArray.length - 1 ? 0 : margin}px` }}>
+            <Cell empty={isEmptyCell(col, row, rowArray.length)} width={width}/>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  function isEmptyCell(col: number, row: number, length: number): boolean {
+    if (!hex) {
+      return false;
+    }
+
+    const cellLength = cols - Math.abs(col - midColIndex);
+    if (cellLength === length) {
+      return false
+    }
+
+    const midRow = (length + 1) / 2 - 1;
+    return Math.abs(row - midRow) > cellLength / 2;
+  }
+};
+
+export default Board;
