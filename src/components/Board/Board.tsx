@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ReactNode, FC } from 'react';
 
 import { getArray } from '../../services';
 
@@ -12,11 +12,12 @@ interface Props {
   margin?: number
   oddEven?: boolean
   rows?: number
+  tiles?: ReactNode[][]
   width: number
 }
 
 const Board: FC<Props> = (props) => {
-  let { cols, hex = false, margin = 0, oddEven = false, rows, width } = props;
+  let { cols, hex = false, margin = 0, oddEven = false, rows, tiles, width } = props;
   cols = hex && cols % 2 === 0 ? cols - 1 : cols;
   rows = hex
     ? cols % 4 === 1 ? cols : cols + 1
@@ -39,16 +40,36 @@ const Board: FC<Props> = (props) => {
   function renderCol(_: unknown, col: number) {
     const isEven = col % 2 === Number(oddEven);
     const rowArray = isEven ? rowArrayEven : rowArrayOdd;
+    const emptyRows = rowArray.map((_: unknown, row: number) => isEmptyCell(col, row, rowArray.length));
 
     return (
       <div className="Board__col" key={col} style={{ margin: `0 ${width / 4 + margin / 2}px` }}>
         {rowArray.map((_: unknown, row: number) => (
           <div key={row} style={{ marginBottom: `${row === rowArray.length - 1 ? 0 : margin}px` }}>
-            <Cell empty={isEmptyCell(col, row, rowArray.length)} width={width}/>
+            {renderCell(col, row, emptyRows)}
           </div>
         ))}
       </div>
     )
+  }
+
+  function renderCell(col: number, row: number, emptyRows: boolean[]) {
+    const empty = emptyRows[row];
+
+    if (empty) {
+      return (<Cell empty width={width}/>);
+    }
+
+    const tileRow = emptyRows.reduce(
+      (acc: number, empty: boolean, index: number) => index < row ? acc - Number(empty) : acc,
+      row
+    );
+
+    if (tiles && tiles[col] && tiles[col][tileRow]) {
+      return (<Cell width={width}>{tiles[col][tileRow]}</Cell>);
+    }
+
+    return (<Cell margin={10} width={width}/>);
   }
 
   function isEmptyCell(col: number, row: number, length: number): boolean {

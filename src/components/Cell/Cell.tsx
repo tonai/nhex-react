@@ -4,11 +4,12 @@ import { Hex } from '../Hex';
 
 interface Props {
   empty?: boolean
+  margin?: number
   width: number
 }
 
 const Cell: FC<Props> = (props) => {
-  const { empty = false, width } = props;
+  const { children, empty = false, margin = 0, width } = props;
 
   if (empty) {
     return (<Hex  width={width}/>);
@@ -16,7 +17,7 @@ const Cell: FC<Props> = (props) => {
 
   return (
     <Hex color={'black'} width={width}>
-      <Hex width={width - 10}/>
+      {children ? children : <Hex width={width - margin}/>}
     </Hex>
   );
 };
