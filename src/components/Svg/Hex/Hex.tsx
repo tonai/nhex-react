@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 
 interface Props {
+  base?: boolean
   color?: string
   width: number
 }
 
 const Hex: FC<Props> = (props) => {
-  const { children, color = 'white', width } = props;
+  const { base, children, color = 'white', width } = props;
   const w = width * 2;
   const h = Math.sqrt(3) * width;
 
@@ -16,6 +17,10 @@ const Hex: FC<Props> = (props) => {
       fill={color}
     />
   );
+
+  if (!base) {
+    return hex;
+  }
 
   return (
     <svg viewBox={`0 0 ${w} ${h}`} width={w}>

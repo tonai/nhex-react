@@ -1,30 +1,34 @@
 import React, { FC } from 'react';
-import { BoardTile, smartArmy, vegasArmy } from 'nhex-redux';
+import { BoardTile, smartArmy } from 'nhex-redux';
 
-import { Board, Tile } from '../../components';
+import { Board, Clips, Tile } from '../../components';
 
 interface Props {
 }
 
 const GamePage: FC<Props> = () => {
   const width = 100;
+  const margin = 10;
+
   const board = [
     [null, null, null],
     [null, smartArmy.deck[18] as BoardTile, null, null],
-    [null, null, smartArmy.deck[20] as BoardTile, null, null],
+    [smartArmy.deck[22] as BoardTile, null, smartArmy.deck[20] as BoardTile, null, null],
     [null, null, smartArmy.deck[25] as BoardTile, null],
     [smartArmy.deck[12] as BoardTile, null, null]
   ];
-
+  console.log(smartArmy);
+  
   const tiles = board.map(colData =>
     colData.map(tile =>
-      tile && (<Tile tile={tile} width={width}/>)
+      tile && (<Tile margin={margin} tile={tile} width={width}/>)
     )
   );
 
   return (
     <div className="GamePage">
-      <Board cols={5} hex margin={10} tiles={tiles} width={width} />
+      <Clips margin={10} width={width}/>
+      <Board cols={5} hex margin={10} tiles={tiles} width={width}/>
     </div>
   );
 };

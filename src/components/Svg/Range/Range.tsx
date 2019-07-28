@@ -1,8 +1,8 @@
-import React, { CSSProperties, FC } from 'react';
+import React, { FC } from 'react';
 
-interface Props {
-  style?: CSSProperties
-  width: number
+import { SvgProps } from '../../../types';
+
+interface Props extends SvgProps {
 }
 
 const Range: FC<Props> = (props) => {

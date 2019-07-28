@@ -1,10 +1,13 @@
-import React, { ComponentType, CSSProperties, FC } from 'react';
+import React, { ComponentType, FC } from 'react';
 
-import { getArray } from '../../../services';
+import { getArray, modulo } from '../../../services';
+import { SvgProps } from '../../../types';
+
+type boolOrNum = boolean | number;
 
 interface Props {
-  Component: ComponentType<{ width: number, style?: CSSProperties }>
-  data?: [number, number, number, number, number, number]
+  Component: ComponentType<SvgProps>
+  data?: [boolOrNum, boolOrNum, boolOrNum, boolOrNum, boolOrNum, boolOrNum]
   margin?: number
   width: number
 }
@@ -16,6 +19,7 @@ const Group: FC<Props> = (props) => {
   if (!data) {
     return null;
   }
+  console.log(data);
 
   return (
     <g>
@@ -23,24 +27,26 @@ const Group: FC<Props> = (props) => {
     </g>
   );
 
-  function renderGroup(strengh: number, index: number) {
-    if (!strengh) {
+  function renderGroup(strengh: boolOrNum, dir: number) {
+    if (!strengh || !data) {
       return null;
     }
 
-    const array = getArray(strengh);
+    const array = getArray(Number(strengh));
     const styles = {
-      transform: `rotateZ(${index * Math.PI / 3}rad)`,
+      transform: `rotateZ(${dir * Math.PI / 3}rad)`,
       transformOrigin: `${width}px ${height / 2}px`
     };
 
     return (
-      <g key={index} style={styles}>
+      <g key={dir} style={styles}>
         {array.map((_: unknown, index: number) => (
           <Component
             key={index}
+            next={Boolean(data[modulo(dir + 1, 6)])}
+            prev={Boolean(data[modulo(dir - 1, 6)])}
             width={width}
-            style={{ transform: `translateX(${- margin / 2 * (strengh - 1) + margin * index}px)` }}
+            style={{ transform: `translateX(${- margin / 2 * (Number(strengh) - 1) + margin * index}px)` }}
           />
         ))}
       </g>

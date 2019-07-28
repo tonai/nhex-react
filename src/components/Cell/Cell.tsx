@@ -10,7 +10,7 @@ const Cell: FC<Props> = (props) => {
   const { children, width } = props;
 
   return (
-    <Hex color={'black'} width={width}>
+    <Hex base color={'black'} width={width}>
       {children}
     </Hex>
   );

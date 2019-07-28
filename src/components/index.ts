@@ -1,4 +1,4 @@
 export * from './Board';
 export * from './Cell';
-export * from './Svg/Hex';
+export * from './Svg';
 export * from './Tile';
