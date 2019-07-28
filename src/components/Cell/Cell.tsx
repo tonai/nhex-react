@@ -1,23 +1,17 @@
 import React, { FC } from 'react';
 
-import { Hex } from '../Hex';
+import { Hex } from '../Svg';
 
 interface Props {
-  empty?: boolean
-  margin?: number
   width: number
 }
 
 const Cell: FC<Props> = (props) => {
-  const { children, empty = false, margin = 0, width } = props;
-
-  if (empty) {
-    return (<Hex  width={width}/>);
-  }
+  const { children, width } = props;
 
   return (
     <Hex color={'black'} width={width}>
-      {children ? children : <Hex width={width - margin}/>}
+      {children}
     </Hex>
   );
 };

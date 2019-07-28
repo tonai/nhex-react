@@ -43,7 +43,7 @@ const Board: FC<Props> = (props) => {
     const emptyRows = rowArray.map((_: unknown, row: number) => isEmptyCell(col, row, rowArray.length));
 
     return (
-      <div className="Board__col" key={col} style={{ margin: `0 ${width / 4 + margin / 2}px` }}>
+      <div className="Board__col" key={col} style={{ margin: `0 ${- width / 4 + margin / 2}px` }}>
         {rowArray.map((_: unknown, row: number) => (
           <div key={row} style={{ marginBottom: `${row === rowArray.length - 1 ? 0 : margin}px` }}>
             {renderCell(col, row, emptyRows)}
@@ -57,7 +57,7 @@ const Board: FC<Props> = (props) => {
     const empty = emptyRows[row];
 
     if (empty) {
-      return (<Cell empty width={width}/>);
+      return null;
     }
 
     const tileRow = emptyRows.reduce(
@@ -69,7 +69,7 @@ const Board: FC<Props> = (props) => {
       return (<Cell width={width}>{tiles[col][tileRow]}</Cell>);
     }
 
-    return (<Cell margin={10} width={width}/>);
+    return (<Cell width={width}/>);
   }
 
   function isEmptyCell(col: number, row: number, length: number): boolean {
