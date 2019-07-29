@@ -13,7 +13,7 @@ const GamePage: FC<Props> = () => {
   const board = [
     [null, null, smartArmy.deck[15] as BoardTile],
     [null, smartArmy.deck[18] as BoardTile, null, null],
-    [smartArmy.deck[22] as BoardTile, null, smartArmy.deck[20] as BoardTile, null, null],
+    [smartArmy.deck[22] as BoardTile, null, smartArmy.deck[20] as BoardTile, null, smartArmy.deck[13] as BoardTile],
     [null, null, smartArmy.deck[25] as BoardTile, null],
     [smartArmy.deck[12] as BoardTile, null, null]
   ];

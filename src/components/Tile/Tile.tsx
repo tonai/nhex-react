@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { BoardTile } from 'nhex-redux';
 
-import { Armor, Hex, Group, Melee, Percing, Range } from '../Svg';
+import { Armor, Hex, Group, Melee, Net, Percing, Range } from '../Svg';
 
 interface Props {
   margin?: number
@@ -12,7 +12,7 @@ interface Props {
 
 const Tile: FC<Props> = (props) => {
   const { margin = 10, rotation = 0, tile, width } = props;
-  const { armor, color, melee, percing, range } = tile;
+  const { armor, color, melee, net, percing, range } = tile;
   const w = width * 2 - margin * 2;
   const h = Math.sqrt(3) * width;
   const rootStyles = {
@@ -24,6 +24,7 @@ const Tile: FC<Props> = (props) => {
     <g style={rootStyles}>
       <Hex base color={color} width={w / 2}>
         <Group Component={Armor} data={armor} width={w / 2}/>
+        <Group Component={Net} data={net} width={w / 2}/>
         <Group Component={Melee} data={melee} width={w / 2}/>
         <Group Component={Percing} data={percing} width={w / 2}/>
         <Group Component={Range} data={range} width={w / 2}/>
