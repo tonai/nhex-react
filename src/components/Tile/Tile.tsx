@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BoardTile, Modules } from 'nhex-redux';
+import { BoardTile, Modules, TileTypes } from 'nhex-redux';
 
 import { SQRT3 } from '../../constants';
 import { getArray } from '../../services';
@@ -44,6 +44,7 @@ const Tile: FC<Props> = (props) => {
     percing,
     range,
     replace,
+    tileType,
     toughness,
     wounds
   } = tile;
@@ -69,7 +70,10 @@ const Tile: FC<Props> = (props) => {
         {module && module.map((hasConnection, index) => hasConnection && (
           <Connection dir={index} height={h} width={w}/>
         ))}
-        {moduleType && (
+        {moduleType && tileType === TileTypes.HQ && (
+          <Module text={toughness - wounds} width={w} />
+        )}
+        {moduleType && tileType !== TileTypes.HQ && (
           <Module Icon={getModuleIcon(moduleType)} width={w} />
         )}
         <Group Component={Armor} data={armor} width={w}/>
@@ -77,26 +81,30 @@ const Tile: FC<Props> = (props) => {
         <Group Component={Melee} data={melee} width={w}/>
         <Group Component={Percing} data={percing} width={w}/>
         <Group Component={Range} data={range} width={w}/>
-        {typeof initiative !== 'undefined' && initiatives.map((init, index) => (
+        {initiative !== undefined && initiatives.map((init, index) => (
           <Circle key={index} position={index} text={init} width={w}/>
         ))}
-        {toughnessArray.map((_, index) => (
-          <Circle
-            Icon={Toughness}
-            color={wounds > index ? 'red' : 'white'}
-            key={index}
-            position={4 - index}
-            width={w}
-          />
-        ))}
-        {mobility && (
-          <Circle Icon={Move} position={2} width={w}/>
-        )}
-        {replace && (
-          <Circle Icon={Replace} position={5} width={w}/>
-        )}
-        {flashBack && (
-          <Circle Icon={FlashBack} position={5} width={w} iconProps={{ style: { transform: 'translateX(-1px)' } }}/>
+        {tileType !== TileTypes.HQ && (
+          <>
+            {toughnessArray.map((_, index) => (
+              <Circle
+                Icon={Toughness}
+                color={wounds > index ? 'red' : 'white'}
+                key={index}
+                position={4 - index}
+                width={w}
+              />
+            ))}
+            {mobility && (
+              <Circle Icon={Move} position={2} width={w}/>
+            )}
+            {replace && (
+              <Circle Icon={Replace} position={5} width={w}/>
+            )}
+            {flashBack && (
+              <Circle Icon={FlashBack} position={5} width={w} iconProps={{ style: { transform: 'translateX(-1px)' } }}/>
+            )}
+          </>
         )}
       </Hex>
     </g>

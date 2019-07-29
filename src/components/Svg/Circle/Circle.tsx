@@ -34,7 +34,7 @@ const Circle: FC<Props> = (props) => {
         strokeWidth="2"
         style={style}
       />
-      {text && (
+      {text !== undefined && (
         <text
           alignmentBaseline="central"
           fill="white"
