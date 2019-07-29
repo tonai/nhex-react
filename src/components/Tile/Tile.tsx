@@ -4,7 +4,7 @@ import { BoardTile } from 'nhex-redux';
 import { SQRT3 } from '../../constants';
 import { getArray } from '../../services';
 
-import { Armor, Circle, Hex, Group, Melee, Net, Percing, Range, Toughness } from '../Svg';
+import { Armor, FlashBack, Circle, Hex, Group, Melee, Move, Net, Percing, Range, Toughness, Replace } from '../Svg';
 
 interface Props {
   color: string,
@@ -16,7 +16,7 @@ interface Props {
 
 const Tile: FC<Props> = (props) => {
   const { color, margin = 10, rotation = 0, tile, width } = props;
-  const { armor, initiative, melee, net, percing, range, toughness, wounds } = tile;
+  const { armor, flashBack, initiative, melee, mobility, net, percing, range, replace, toughness, wounds } = tile;
   const w = width - margin;
   const h = SQRT3 * width * 2;
 
@@ -51,6 +51,15 @@ const Tile: FC<Props> = (props) => {
             width={w}
           />
         ))}
+        {mobility && (
+          <Circle Icon={Move} position={2} width={w}/>
+        )}
+        {replace && (
+          <Circle Icon={Replace} position={5} width={w}/>
+        )}
+        {flashBack && (
+          <Circle Icon={FlashBack} position={5} width={w} iconProps={{ style: { transform: 'translateX(-1px)' } }}/>
+        )}
       </Hex>
     </g>
   );

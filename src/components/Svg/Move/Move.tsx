@@ -5,13 +5,13 @@ import { IconProps } from '../../../types';
 interface Props extends IconProps {
 }
 
-const Toughness: FC < Props > = (props) => {
+const Move: FC<Props> = (props) => {
   const { color = 'white', style, width } = props;
 
   return (
     <svg viewBox="0 0 24 24" width={width}>
       <path
-        d="M12,1 L3,5 V11 c0,5.55 3.84,10.74 9,12 5.16,-1.26 9,-6.45 9,-12 V5 Z"
+        d="M10,9 V5 l-7,7 7,7 v-4.1 c5,0 8.5,1.6 11,5.1 -1,-5 -4,-10 -11,-11 Z"
         fill={color}
         style={style}
       />
@@ -19,4 +19,4 @@ const Toughness: FC < Props > = (props) => {
   );
 };
 
-export default Toughness;
+export default Move;

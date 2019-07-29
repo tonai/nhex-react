@@ -5,13 +5,14 @@ import { IconProps, SvgProps } from '../../../types';
 
 interface Props extends SvgProps {
   Icon?: ComponentType<IconProps>
-  color?: string,
+  color?: string
+  iconProps?: Partial<SvgProps>
   position?: number
   text?: string | number
 }
 
 const Circle: FC<Props> = (props) => {
-  const { Icon, color = 'white', position, style, text, width } = props;
+  const { Icon, color = 'white', iconProps, position, style, text, width } = props;
   const height = SQRT3 * width;
   const cx = getCx();
   const cy = getCy();
@@ -46,7 +47,7 @@ const Circle: FC<Props> = (props) => {
       )}
       {Icon && (
         <g style={{ transform: `translateX(${cx - width / 10}px) translateY(${cy - height / 2}px)` }}>
-          <Icon color={color} width={width / 5} />
+          <Icon color={color} width={width / 5} {...iconProps}/>
         </g>
       )}
     </>
