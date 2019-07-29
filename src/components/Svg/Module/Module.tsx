@@ -2,7 +2,7 @@ import { Modules } from 'nhex-redux';
 import React, { CSSProperties, FC } from 'react';
 
 import { SQRT3 } from '../../../constants';
-import { Connection, Medic, Saboteur, Scout } from '../index';
+import { Connection, Medic, Mother, Officer, Saboteur, Scout } from '../index';
 
 interface Props {
   module?: [boolean, boolean, boolean, boolean, boolean, boolean]
@@ -56,6 +56,12 @@ const Module: FC<Props> = (props) => {
     switch(moduleType) {
       case Modules.Medic:
         return Medic;
+
+      case Modules.Mother:
+        return Mother;
+
+      case Modules.Officer:
+        return Officer;
 
       case Modules.Saboteur:
         return Saboteur;
