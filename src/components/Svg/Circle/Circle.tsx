@@ -1,15 +1,17 @@
-import React, { FC } from 'react';
+import React, { ComponentType, FC } from 'react';
 
 import { SQRT3 } from '../../../constants';
-import { SvgProps } from '../../../types';
+import { IconProps, SvgProps } from '../../../types';
 
 interface Props extends SvgProps {
+  Icon?: ComponentType<IconProps>
+  color?: string,
   position?: number
   text?: string | number
 }
 
 const Circle: FC<Props> = (props) => {
-  const { children, position, style, text, width } = props;
+  const { Icon, color = 'white', position, style, text, width } = props;
   const height = SQRT3 * width;
   const cx = getCx();
   const cy = getCy();
@@ -27,7 +29,7 @@ const Circle: FC<Props> = (props) => {
         cx={cx}
         cy={cy}
         r={width / 6 - 2}
-        stroke="white"
+        stroke={color}
         strokeWidth="2"
         style={style}
       />
@@ -42,7 +44,11 @@ const Circle: FC<Props> = (props) => {
           y={cy - 1}
         >{text}</text>
       )}
-      {children}
+      {Icon && (
+        <g style={{ transform: `translateX(${cx - width / 10}px) translateY(${cy - height / 2}px)` }}>
+          <Icon color={color} width={width / 5} />
+        </g>
+      )}
     </>
   );
 

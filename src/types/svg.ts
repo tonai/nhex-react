@@ -1,10 +1,16 @@
 import { CSSProperties } from 'react';
 
+export interface IconProps {
+  color?: string
+  style?: CSSProperties
+  width: number
+}
+
 export interface SvgProps {
   next?: boolean
   prev?: boolean
-  width: number,
-  style?: CSSProperties 
+  style?: CSSProperties
+  width: number
 }
 
 export enum Clips {

@@ -7,3 +7,4 @@ export * from './Melee';
 export * from './Net';
 export * from './Percing';
 export * from './Range';
+export * from './Toughness';
