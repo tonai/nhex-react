@@ -3,6 +3,8 @@ import React, { FC } from 'react';
 import { Hex } from '../Hex';
 import { Clips as Enum } from '../../../types';
 
+import './styles.css';
+
 interface Props {
   margin: number
   width: number
@@ -15,7 +17,7 @@ const Clips: FC<Props> = (props) => {
   const h = Math.sqrt(3) * width;
 
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} width={w}>
+    <svg className="Clips" viewBox={`0 0 ${w} ${h}`} width={w}>
       <clipPath id={Enum.Hex}>
         <Hex width={w / 2}/>
       </clipPath>
