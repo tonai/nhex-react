@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 
+import { SQRT3 } from '../../../constants';
+
 interface Props {
   base?: boolean
   color?: string
@@ -9,7 +11,7 @@ interface Props {
 const Hex: FC<Props> = (props) => {
   const { base, children, color = 'white', width } = props;
   const w = width * 2;
-  const h = Math.sqrt(3) * width;
+  const h = SQRT3 * width;
 
   const hex = (
     <path 

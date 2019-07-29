@@ -1,8 +1,8 @@
 import { CSSProperties } from 'react';
 
 export interface SvgProps {
-  next: boolean
-  prev: boolean
+  next?: boolean
+  prev?: boolean
   width: number,
   style?: CSSProperties 
 }

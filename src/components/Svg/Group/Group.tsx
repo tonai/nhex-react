@@ -1,5 +1,6 @@
 import React, { ComponentType, FC } from 'react';
 
+import { SQRT3 } from '../../../constants';
 import { getArray, modulo } from '../../../services';
 import { SvgProps } from '../../../types';
 
@@ -14,7 +15,7 @@ interface Props {
 
 const Group: FC<Props> = (props) => {
   const { Component, data, margin = 10, width } = props;
-  const height = Math.sqrt(3) * width;
+  const height = SQRT3 * width;
 
   if (!data) {
     return null;

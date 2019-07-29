@@ -1,4 +1,5 @@
 export * from './Armor';
+export * from './Circle';
 export * from './Clips';
 export * from './Hex';
 export * from './Group';

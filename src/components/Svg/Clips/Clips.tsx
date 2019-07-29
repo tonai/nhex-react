@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import { Hex } from '../Hex';
+import { SQRT3 } from '../../../constants';
 import { Clips as Enum } from '../../../types';
 
 import './styles.css';
@@ -14,7 +15,7 @@ const Clips: FC<Props> = (props) => {
   const { margin, width } = props;
 
   const w = (width - margin) * 2;
-  const h = Math.sqrt(3) * width;
+  const h = SQRT3 * width;
 
   return (
     <svg className="Clips" viewBox={`0 0 ${w} ${h}`} width={w}>

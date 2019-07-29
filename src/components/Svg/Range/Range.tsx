@@ -16,13 +16,13 @@ const Range: FC<Props> = (props) => {
         style={style}
       />
       <path 
-        d={`M${width + width / 8 - 2},0 L${width},${width / 2 - 4} ${width - width / 8 + 2},0`}
+        d={`M${width + width / 8 - 3},0 L${width},${width / 2 - 9} ${width - width / 8 + 3},0`}
         stroke="white"
-        strokeWidth="1"
+        strokeWidth="2"
         style={style}
       />
       <path 
-        d={`M${width + width / 16},0 A${width / 16},${width / 16} 0 0,1 ${width - width / 16},0 Z`}
+        d={`M${width + width / 20},0 A${width / 20},${width / 20} 0 0,1 ${width - width / 20},0 Z`}
         fill="white"
         style={style}
       />
