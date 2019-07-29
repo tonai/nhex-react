@@ -19,7 +19,6 @@ const Group: FC<Props> = (props) => {
   if (!data) {
     return null;
   }
-  console.log(data);
 
   return (
     <g>

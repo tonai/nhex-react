@@ -11,13 +11,12 @@ const GamePage: FC<Props> = () => {
   const margin = 10;
 
   const board = [
-    [null, null, null],
+    [null, null, smartArmy.deck[15] as BoardTile],
     [null, smartArmy.deck[18] as BoardTile, null, null],
     [smartArmy.deck[22] as BoardTile, null, smartArmy.deck[20] as BoardTile, null, null],
     [null, null, smartArmy.deck[25] as BoardTile, null],
     [smartArmy.deck[12] as BoardTile, null, null]
   ];
-  console.log(smartArmy);
   
   const tiles = board.map(colData =>
     colData.map(tile =>
