@@ -1,24 +1,56 @@
 import React, { FC } from 'react';
-import { BoardTile } from 'nhex-redux';
+import { BoardTile, Modules } from 'nhex-redux';
 
 import { SQRT3 } from '../../constants';
 import { getArray } from '../../services';
 
-import { Armor, FlashBack, Circle, Hex, Group, Melee, Move, Net, Percing, Range, Toughness, Replace } from '../Svg';
+import {
+  Armor,
+  Connection,
+  Circle,
+  FlashBack,
+  Hex,
+  Group,
+  Melee,
+  Module,
+  Move,
+  Net,
+  Percing,
+  Range,
+  Replace,
+  Scout,
+  Toughness
+} from '../Svg';
 
 interface Props {
   color: string,
   margin?: number
-  rotation?: number
   tile: BoardTile
   width: number
 }
 
 const Tile: FC<Props> = (props) => {
-  const { color, margin = 10, rotation = 0, tile, width } = props;
-  const { armor, flashBack, initiative, melee, mobility, net, percing, range, replace, toughness, wounds } = tile;
+  const { color, margin = 10, tile, width } = props;
+  const {
+    armor,
+    direction = 0,
+    flashBack,
+    initiative,
+    melee,
+    mobility,
+    module,
+    moduleType,
+    net,
+    percing,
+    range,
+    replace,
+    toughness,
+    wounds
+  } = tile;
+
+  const height = SQRT3 * width;
   const w = width - margin;
-  const h = SQRT3 * width * 2;
+  const h = SQRT3 * w;
 
   const initiatives = initiative instanceof Array
     ? initiative
@@ -27,13 +59,19 @@ const Tile: FC<Props> = (props) => {
   const toughnessArray = getArray(toughness - 1);
 
   const rootStyles = {
-    transform: `rotateZ(${rotation * Math.PI / 3}rad) translateX(${margin}px)`,
-    transformOrigin: `${width * 2}px ${h / 2}px`
+    transform: `rotateZ(${direction * Math.PI / 3}rad) translateX(${margin}px)`,
+    transformOrigin: `${width}px ${height / 2}px`
   };
 
   return (
     <g style={rootStyles}>
       <Hex base color={color} width={w}>
+        {module && module.map((hasConnection, index) => hasConnection && (
+          <Connection dir={index} height={h} width={w}/>
+        ))}
+        {moduleType && (
+          <Module Icon={getModuleIcon(moduleType)} width={w} />
+        )}
         <Group Component={Armor} data={armor} width={w}/>
         <Group Component={Net} data={net} width={w}/>
         <Group Component={Melee} data={melee} width={w}/>
@@ -63,6 +101,13 @@ const Tile: FC<Props> = (props) => {
       </Hex>
     </g>
   );
+
+  function getModuleIcon(moduleType: Modules) {
+    switch(moduleType) {
+      case Modules.Scout:
+        return Scout;
+    }
+  }
 };
 
 export default Tile;

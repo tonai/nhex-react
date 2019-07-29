@@ -4,6 +4,8 @@ import { SQRT3 } from '../../../constants';
 import { getArray, modulo } from '../../../services';
 import { SvgProps } from '../../../types';
 
+import { Dir } from '../Dir';
+
 type boolOrNum = boolean | number;
 
 interface Props {
@@ -33,13 +35,8 @@ const Group: FC<Props> = (props) => {
     }
 
     const array = getArray(Number(strengh));
-    const styles = {
-      transform: `rotateZ(${dir * Math.PI / 3}rad)`,
-      transformOrigin: `${width}px ${height / 2}px`
-    };
-
     return (
-      <g key={dir} style={styles}>
+      <Dir dir={dir} key={dir} height={height} width={width}>
         {array.map((_: unknown, index: number) => (
           <Component
             key={index}
@@ -49,7 +46,7 @@ const Group: FC<Props> = (props) => {
             style={{ transform: `translateX(${- margin / 2 * (Number(strengh) - 1) + margin * index}px)` }}
           />
         ))}
-      </g>
+      </Dir>
     );
   }
 };

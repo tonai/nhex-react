@@ -15,7 +15,7 @@ const GamePage: FC<Props> = () => {
     [null, smartArmy.deck[18] as BoardTile, null, null],
     [smartArmy.deck[22] as BoardTile, null, smartArmy.deck[20] as BoardTile, null, smartArmy.deck[13] as BoardTile],
     [null, null, smartArmy.deck[25] as BoardTile, null],
-    [smartArmy.deck[12] as BoardTile, null, null]
+    [smartArmy.deck[12] as BoardTile, null, smartArmy.deck[33] as BoardTile]
   ];
   
   const tiles = board.map(colData =>

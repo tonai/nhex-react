@@ -6,6 +6,10 @@ export interface IconProps {
   width: number
 }
 
+export interface ModuleProps {
+  width: number
+}
+
 export interface SvgProps {
   next?: boolean
   prev?: boolean
