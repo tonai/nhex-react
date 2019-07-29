@@ -3,13 +3,14 @@ import React, { FC } from 'react';
 import { Dir } from '../Dir';
 
 interface Props {
+  color?: string
   dir: number
   height: number
   width: number
 }
 
 const Connection: FC<Props> = (props) => {
-  const { dir, height, width } = props;
+  const { color = 'black', dir, height, width } = props;
 
   return (
     <Dir dir={dir} key={dir} height={height} width={width}>
@@ -21,7 +22,7 @@ const Connection: FC<Props> = (props) => {
       />
       <path
         d={`M${width},${width / 16} l${width / 12},${width / 12} h${- width / 12 + width / 32} v${width / 32} h${- 2 * width / 32} v${- width / 32} h${- width / 12 + width / 32} z`}
-        fill="black"
+        fill={color}
       />
     </Dir>
   );

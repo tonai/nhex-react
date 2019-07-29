@@ -1,12 +1,11 @@
 import React, { FC } from 'react';
-import { BoardTile, Modules, TileTypes } from 'nhex-redux';
+import { BoardTile, TileTypes } from 'nhex-redux';
 
 import { SQRT3 } from '../../constants';
 import { getArray } from '../../services';
 
 import {
   Armor,
-  Connection,
   Circle,
   FlashBack,
   Hex,
@@ -18,7 +17,6 @@ import {
   Percing,
   Range,
   Replace,
-  Scout,
   Toughness
 } from '../Svg';
 
@@ -51,7 +49,6 @@ const Tile: FC<Props> = (props) => {
 
   const height = SQRT3 * width;
   const w = width - margin;
-  const h = SQRT3 * w;
 
   const initiatives = initiative instanceof Array
     ? initiative
@@ -67,14 +64,11 @@ const Tile: FC<Props> = (props) => {
   return (
     <g style={rootStyles}>
       <Hex base color={color} width={w}>
-        {module && module.map((hasConnection, index) => hasConnection && (
-          <Connection dir={index} height={h} width={w}/>
-        ))}
         {moduleType && tileType === TileTypes.HQ && (
-          <Module text={toughness - wounds} width={w} />
+          <Module module={module} moduleType={moduleType} text={toughness - wounds} width={w} />
         )}
         {moduleType && tileType !== TileTypes.HQ && (
-          <Module Icon={getModuleIcon(moduleType)} width={w} />
+          <Module moduleType={moduleType} module={module} width={w} />
         )}
         <Group Component={Armor} data={armor} width={w}/>
         <Group Component={Net} data={net} width={w}/>
@@ -109,13 +103,6 @@ const Tile: FC<Props> = (props) => {
       </Hex>
     </g>
   );
-
-  function getModuleIcon(moduleType: Modules) {
-    switch(moduleType) {
-      case Modules.Scout:
-        return Scout;
-    }
-  }
 };
 
 export default Tile;

@@ -1,21 +1,31 @@
-import React, { ComponentType, FC } from 'react';
+import { Modules } from 'nhex-redux';
+import React, { CSSProperties, FC } from 'react';
 
 import { SQRT3 } from '../../../constants';
-import { ModuleProps, SvgProps } from '../../../types';
+import { Connection, Medic, Saboteur, Scout } from '../index';
 
-interface Props extends SvgProps {
-  Icon?: ComponentType<ModuleProps>
+interface Props {
+  module?: [boolean, boolean, boolean, boolean, boolean, boolean]
+  moduleType?: Modules
+  style?: CSSProperties
   text?: string | number
+  width: number
 }
 
 const Module: FC<Props> = (props) => {
-  const { Icon, style, text, width } = props;
+  const { module, moduleType, style, text, width } = props;
   const height = SQRT3 * width;
+  const Icon = getModuleIcon();
   const cx = width;
   const cy = height / 2;
 
+  const color = moduleType === Modules.Saboteur ? 'red' : 'black';
+
   return (
     <>
+      {module && module.map((hasConnection, index) => hasConnection && (
+        <Connection color={color} dir={index} height={height} key={index} width={width}/>
+      ))}
       <circle
         cx={cx}
         cy={cy}
@@ -37,12 +47,23 @@ const Module: FC<Props> = (props) => {
         >{text}</text>
       )}
       {Icon && (
-        <g style={{ transform: `translateX(${cx}px) translateY(${cy}px)` }}>
-          <Icon width={width}/>
-        </g>
+        <Icon color={color} cx={cx} cy={cy} width={width}/>
       )}
     </>
   );
+
+  function getModuleIcon() {
+    switch(moduleType) {
+      case Modules.Medic:
+        return Medic;
+
+      case Modules.Saboteur:
+        return Saboteur;
+
+      case Modules.Scout:
+        return Scout;
+    }
+  }
 };
 
 export default Module;

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BoardTile, smartArmy } from 'nhex-redux';
+import { BoardTile, smartArmy, vegasArmy } from 'nhex-redux';
 
 import { Board, Clips, Tile } from '../../components';
 
@@ -11,9 +11,9 @@ const GamePage: FC<Props> = () => {
   const margin = 10;
 
   const board = [
-    [null, null, smartArmy.deck[15] as BoardTile],
+    [vegasArmy.deck[28] as BoardTile, null, smartArmy.deck[15] as BoardTile],
     [null, smartArmy.deck[18] as BoardTile, smartArmy.hq, null],
-    [smartArmy.deck[22] as BoardTile, null, smartArmy.deck[20] as BoardTile, null, smartArmy.deck[13] as BoardTile],
+    [smartArmy.deck[22] as BoardTile, vegasArmy.deck[29] as BoardTile, smartArmy.deck[20] as BoardTile, null, smartArmy.deck[13] as BoardTile],
     [null, null, smartArmy.deck[25] as BoardTile, null],
     [smartArmy.deck[12] as BoardTile, null, smartArmy.deck[33] as BoardTile]
   ];

@@ -7,6 +7,9 @@ export interface IconProps {
 }
 
 export interface ModuleProps {
+  color?: string
+  cx: number
+  cy: number
   width: number
 }
 

@@ -1,14 +1,16 @@
-import React, { ComponentType, FC } from 'react';
+import React, { ComponentType, CSSProperties, FC } from 'react';
 
 import { SQRT3 } from '../../../constants';
 import { IconProps, SvgProps } from '../../../types';
 
-interface Props extends SvgProps {
+interface Props {
   Icon?: ComponentType<IconProps>
   color?: string
   iconProps?: Partial<SvgProps>
   position?: number
+  style?: CSSProperties
   text?: string | number
+  width: number
 }
 
 const Circle: FC<Props> = (props) => {
