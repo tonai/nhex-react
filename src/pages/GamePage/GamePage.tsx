@@ -20,7 +20,7 @@ const GamePage: FC<Props> = () => {
   
   const tiles = board.map(colData =>
     colData.map(tile =>
-      tile && (<Tile margin={margin} tile={tile} width={width}/>)
+      tile && (<Tile color={smartArmy.color} margin={margin} tile={tile} width={width}/>)
     )
   );
 
