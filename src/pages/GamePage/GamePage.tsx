@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BoardTile, smartArmy, vegasArmy } from 'nhex-redux';
+import { Armies, BoardTile, smartArmy, vegasArmy } from 'nhex-redux';
 
 import { Board, Clips, Tile } from '../../components';
 
@@ -20,7 +20,7 @@ const GamePage: FC<Props> = () => {
   
   const tiles = board.map(colData =>
     colData.map(tile =>
-      tile && (<Tile color={smartArmy.color} margin={margin} tile={tile} width={width}/>)
+      tile && (<Tile color={getArmyColor(tile.army)} margin={margin} tile={tile} width={width}/>)
     )
   );
 
@@ -30,6 +30,16 @@ const GamePage: FC<Props> = () => {
       <Board cols={5} hex margin={10} tiles={tiles} width={width}/>
     </div>
   );
+
+  function getArmyColor(army: Armies) {
+    switch(army) {
+      case Armies.Smart:
+        return smartArmy.color;
+
+      case Armies.Vegas:
+        return vegasArmy.color;
+    }
+  }
 };
 
 export default GamePage;
