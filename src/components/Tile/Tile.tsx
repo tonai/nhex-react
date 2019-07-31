@@ -54,8 +54,6 @@ const Tile: FC<Props> = (props) => {
     ? initiative
     : [initiative];
 
-  const toughnessArray = getArray(toughness - 1);
-
   const rootStyles = {
     transform: `rotateZ(${direction * Math.PI / 3}rad) translateX(${margin}px)`,
     transformOrigin: `${width}px ${height / 2}px`
@@ -78,31 +76,41 @@ const Tile: FC<Props> = (props) => {
         {initiative !== undefined && initiatives.map((init, index) => (
           <Circle key={index} position={index} text={init} width={w}/>
         ))}
-        {tileType !== TileTypes.HQ && (
-          <>
-            {toughnessArray.map((_, index) => (
-              <Circle
-                Icon={Toughness}
-                color={wounds > index ? 'red' : 'white'}
-                key={index}
-                position={4 - index}
-                width={w}
-              />
-            ))}
-            {mobility && (
-              <Circle Icon={Move} position={2} width={w}/>
-            )}
-            {replace && (
-              <Circle Icon={Replace} position={5} width={w}/>
-            )}
-            {flashBack && (
-              <Circle Icon={FlashBack} position={5} width={w} iconProps={{ style: { transform: 'translateX(-1px)' } }}/>
-            )}
-          </>
-        )}
+        {renderCustomProperties()}
       </Hex>
     </g>
   );
+
+  function renderCustomProperties() {
+    if (tileType === TileTypes.HQ) {
+      return null;
+    }
+
+    const toughnessArray = getArray(toughness - 1);
+
+    return (
+      <>
+        {toughnessArray.map((_, index) => (
+          <Circle
+            Icon={Toughness}
+            color={wounds > index ? 'red' : 'white'}
+            key={index}
+            position={4 - index}
+            width={w}
+          />
+        ))}
+        {mobility && (
+          <Circle Icon={Move} position={2} width={w}/>
+        )}
+        {replace && (
+          <Circle Icon={Replace} position={5} width={w}/>
+        )}
+        {flashBack && (
+          <Circle Icon={FlashBack} position={5} width={w} iconProps={{ style: { transform: 'translateX(-1px)' } }}/>
+        )}
+      </>
+    );
+  }
 };
 
 export default Tile;

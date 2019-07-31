@@ -5,7 +5,7 @@ import { ModuleProps } from '../../../types';
 interface Props extends ModuleProps {
 }
 
-const Scout: FC<Props> = (props) => {
+const Agitator: FC<Props> = (props) => {
   const { color = 'black', cx, cy, width } = props;
 
   return (
@@ -17,8 +17,8 @@ const Scout: FC<Props> = (props) => {
       textAnchor="middle"
       x={cx}
       y={cy - 1}
-    >+1</text>
+    >$</text>
   );
 };
 
-export default Scout;
+export default Agitator;

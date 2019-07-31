@@ -13,7 +13,7 @@ const Officer: FC<Props> = (props) => {
       <text
         alignmentBaseline="central"
         fill={color}
-        fontSize={2 * width / 3}
+        fontSize={3 * width / 4}
         fontWeight="bold"
         textAnchor="middle"
         x={cx}

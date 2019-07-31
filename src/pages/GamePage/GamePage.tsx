@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Armies, BoardTile, smartArmy, vegasArmy } from 'nhex-redux';
+import { Armies, Tile as TileType, TileTypes, smartArmy, vegasArmy } from 'nhex-redux';
 
 import { Board, Clips, Tile } from '../../components';
 
@@ -11,18 +11,14 @@ const GamePage: FC<Props> = () => {
   const margin = 10;
 
   const board = [
-    [vegasArmy.deck[28] as BoardTile, null, smartArmy.deck[15] as BoardTile],
-    [null, smartArmy.deck[18] as BoardTile, smartArmy.hq, smartArmy.deck[30] as BoardTile],
-    [smartArmy.deck[22] as BoardTile, vegasArmy.deck[29] as BoardTile, smartArmy.deck[20] as BoardTile, null, smartArmy.deck[13] as BoardTile],
-    [null, null, smartArmy.deck[25] as BoardTile, null],
-    [smartArmy.deck[12] as BoardTile, smartArmy.deck[26] as BoardTile, smartArmy.deck[33] as BoardTile]
+    [vegasArmy.deck[28], null, smartArmy.deck[15]],
+    [null, smartArmy.deck[18], smartArmy.hq, smartArmy.deck[30]],
+    [smartArmy.deck[22], vegasArmy.deck[29], smartArmy.deck[20], null, smartArmy.deck[13]],
+    [vegasArmy.deck[32], null, smartArmy.deck[25], vegasArmy.deck[25]],
+    [smartArmy.deck[12], smartArmy.deck[26], smartArmy.deck[33]]
   ];
   
-  const tiles = board.map(colData =>
-    colData.map(tile =>
-      tile && (<Tile color={getArmyColor(tile.army)} margin={margin} tile={tile} width={width}/>)
-    )
-  );
+  const tiles = board.map(colData => colData.map(renderTile));
 
   return (
     <div className="GamePage">
@@ -30,6 +26,19 @@ const GamePage: FC<Props> = () => {
       <Board cols={5} hex margin={10} tiles={tiles} width={width}/>
     </div>
   );
+
+  function renderTile(tile: TileType | null) {
+    if (!tile) {
+      return null;
+    } else if (tile.tileType === TileTypes.Foundation) {
+      return null;
+    } else if (tile.tileType === TileTypes.Action) {
+      return null;
+    }
+    return (
+      <Tile color={getArmyColor(tile.army)} margin={margin} tile={tile} width={width}/>
+    );
+  }
 
   function getArmyColor(army: Armies) {
     switch(army) {

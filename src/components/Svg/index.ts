@@ -1,3 +1,4 @@
+export * from './Agitator';
 export * from './Armor';
 export * from './Circle';
 export * from './Clips';

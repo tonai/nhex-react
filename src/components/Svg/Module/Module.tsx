@@ -2,7 +2,7 @@ import { Modules } from 'nhex-redux';
 import React, { CSSProperties, FC } from 'react';
 
 import { SQRT3 } from '../../../constants';
-import { Connection, Medic, Mother, Officer, Saboteur, Scout } from '../index';
+import { Agitator, Connection, Medic, Mother, Officer, Saboteur, Scout } from '../index';
 
 interface Props {
   module?: [boolean, boolean, boolean, boolean, boolean, boolean]
@@ -16,10 +16,9 @@ const Module: FC<Props> = (props) => {
   const { module, moduleType, style, text, width } = props;
   const height = SQRT3 * width;
   const Icon = getModuleIcon();
+  const color = getColor();
   const cx = width;
   const cy = height / 2;
-
-  const color = moduleType === Modules.Saboteur ? 'red' : 'black';
 
   return (
     <>
@@ -52,8 +51,22 @@ const Module: FC<Props> = (props) => {
     </>
   );
 
+  function getColor() {
+    switch(moduleType) {
+      case Modules.Agitator:
+      case Modules.Saboteur:
+        return 'red';
+
+      default:
+        return 'black';
+    }
+  }
+
   function getModuleIcon() {
     switch(moduleType) {
+      case Modules.Agitator:
+        return Agitator;
+
       case Modules.Medic:
         return Medic;
 
