@@ -6,6 +6,12 @@ export interface IconProps {
   width: number
 }
 
+export interface FoundationProps {
+  cx: number
+  cy: number
+  width: number
+}
+
 export interface ModuleProps {
   color?: string
   cx: number

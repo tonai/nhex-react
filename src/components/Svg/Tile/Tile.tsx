@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { BoardTile, TileTypes } from 'nhex-redux';
 
-import { SQRT3 } from '../../constants';
-import { getArray } from '../../services';
+import { SQRT3 } from '../../../constants';
+import { getArray } from '../../../services';
 
 import {
   Armor,
@@ -18,7 +18,7 @@ import {
   Range,
   Replace,
   Toughness
-} from '../Svg';
+} from '../';
 
 interface Props {
   color: string,

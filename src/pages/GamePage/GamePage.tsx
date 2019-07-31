@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Armies, Tile as TileType, TileTypes, smartArmy, vegasArmy } from 'nhex-redux';
 
-import { Board, Clips, Tile } from '../../components';
+import { Board, Clips, Tile, TileFoundation } from '../../components';
 
 interface Props {
 }
@@ -17,7 +17,7 @@ const GamePage: FC<Props> = () => {
     [vegasArmy.deck[32], null, smartArmy.deck[25], vegasArmy.deck[25]],
     [smartArmy.deck[12], smartArmy.deck[26], smartArmy.deck[33]]
   ];
-  
+
   const tiles = board.map(colData => colData.map(renderTile));
 
   return (
@@ -31,7 +31,7 @@ const GamePage: FC<Props> = () => {
     if (!tile) {
       return null;
     } else if (tile.tileType === TileTypes.Foundation) {
-      return null;
+      return <TileFoundation color={getArmyColor(tile.army)} margin={margin} tile={tile} width={width}/>;
     } else if (tile.tileType === TileTypes.Action) {
       return null;
     }
