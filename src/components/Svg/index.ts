@@ -1,5 +1,6 @@
 export * from './Agitator';
 export * from './Armor';
+export * from './Battle';
 export * from './Circle';
 export * from './Clips';
 export * from './Connection';
