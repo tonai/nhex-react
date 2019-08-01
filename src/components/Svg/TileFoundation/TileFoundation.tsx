@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React, { ComponentType, FC } from 'react';
 import { FoundationTile, Foundations } from 'nhex-redux';
 
 import { SQRT3 } from '../../../constants';
+import { FoundationProps } from '../../../types';
 
 import { Hex, Mine } from '../';
 
@@ -31,15 +32,18 @@ const TileFoundation: FC<Props> = (props) => {
   return (
     <g style={rootStyles}>
       <Hex base color={color} width={w}>
-        {<Icon cx={cx} cy={cy} width={width}/>}
+        {Icon && (<Icon cx={cx} cy={cy} width={width}/>)}
       </Hex>
     </g>
   );
 
-  function getFoundationIcon() {
+  function getFoundationIcon(): ComponentType<FoundationProps> | null {
     switch(foundationType) {
       case Foundations.Mine:
         return Mine;
+
+      default:
+        return null
     }
   }
 };

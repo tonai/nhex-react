@@ -21,5 +21,6 @@ export * from './Replace';
 export * from './Saboteur';
 export * from './Scout';
 export * from './Tile';
+export * from './TileAction';
 export * from './TileFoundation';
 export * from './Toughness';
