@@ -17,3 +17,9 @@ export function getStarPath(outerRadius: number, innerRadius: number, length: nu
     .join(' ');
   return `M${getOuterPoint(0)} L${getInnerPoint(0)} ${path}`;
 }
+
+export function createCirclePath(cx: number, cy: number) {
+  return function(r: number) {
+    return `M${cx},${cy - r} a${r},${r} 0 0,1 0,${r * 2} a${r},${r} 0 0,1 0,${-r * 2}`;
+  }
+}

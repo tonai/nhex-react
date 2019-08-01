@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 
+import { createCirclePath } from '../../../services';
 import { FoundationProps } from '../../../types';
 
 interface Props extends FoundationProps {
@@ -7,6 +8,7 @@ interface Props extends FoundationProps {
 
 const Mine: FC<Props> = (props) => {
   const { cx, cy, width } = props;
+  const circle = createCirclePath(cx, cy);
 
   const r1 = 18 * width / 30;
   const r2 = 16 * width / 30;
@@ -50,10 +52,6 @@ const Mine: FC<Props> = (props) => {
       />
     </>
   );
-
-  function circle(r: number) {
-    return `M${cx},${cy - r} a${r},${r} 0 0,1 0,${r * 2} a${r},${r} 0 0,1 0,${- r * 2}`;
-  }
 };
 
 export default Mine;
