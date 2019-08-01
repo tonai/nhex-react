@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
-import { BoardTile } from 'nhex-redux';
+import { ModuleArmyTile, SoldierArmyTile } from 'nhex-redux';
 
 import { getArray } from '../../../services';
 
 import { Circle, FlashBack, Move, Replace, Toughness } from '../';
 
 interface Props {
-  tile: BoardTile
+  tile: ModuleArmyTile | SoldierArmyTile
   width: number
 }
 
 const Properties: FC<Props> = (props) => {
   const { tile, width } = props;
-  const { flashBack, mobility, replace, toughness, wounds } = tile;
+  const { flashBack, mobility, replace, toughness, wounds } = tile as SoldierArmyTile;
   const toughnessArray = getArray(toughness - 1);
 
   return (

@@ -1,21 +1,20 @@
 import React, { FC } from 'react';
-import { ModuleTile } from 'nhex-redux';
+import { ModuleArmyTile } from 'nhex-redux';
 
 import { SQRT3 } from '../../../constants';
 
 import { Hex, Module, } from '../';
-import { Properties } from '../index';
+import { Armor, Group, Properties } from '../index';
 
 interface Props {
-  color: string,
   margin?: number
-  tile: ModuleTile
+  tile: ModuleArmyTile
   width: number
 }
 
 const TileModule: FC<Props> = (props) => {
-  const { color, margin = 10, tile, width } = props;
-  const { direction = 0, module, moduleType, } = tile;
+  const { margin = 10, tile, width } = props;
+  const { armor, color, direction = 0, module, moduleType } = tile;
 
   const height = SQRT3 * width;
   const w = width - margin;
@@ -29,6 +28,7 @@ const TileModule: FC<Props> = (props) => {
     <g style={rootStyles}>
       <Hex base color={color} width={w}>
         <Module moduleType={moduleType} module={module} width={w} />
+        <Group Component={Armor} data={armor} width={w}/>
         <Properties tile={tile} width={w}/>
       </Hex>
     </g>

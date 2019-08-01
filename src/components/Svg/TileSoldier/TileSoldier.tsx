@@ -1,20 +1,19 @@
 import React, { FC } from 'react';
-import { SoldierTile } from 'nhex-redux';
+import { SoldierArmyTile } from 'nhex-redux';
 
 import { SQRT3 } from '../../../constants';
 
 import { Armor, Circle, Hex, Group, Melee, Net, Percing, Properties, Range } from '../';
 
 interface Props {
-  color: string,
   margin?: number
-  tile: SoldierTile
+  tile: SoldierArmyTile
   width: number
 }
 
 const TileSoldier: FC<Props> = (props) => {
-  const { color, margin = 10, tile, width } = props;
-  const { armor, direction = 0, initiative, melee, net, percing, range } = tile;
+  const { margin = 10, tile, width } = props;
+  const { armor, color, direction = 0, initiative, melee, net, percing, range } = tile;
 
   const height = SQRT3 * width;
   const w = width - margin;

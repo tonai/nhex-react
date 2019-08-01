@@ -1,5 +1,5 @@
 import React, { ComponentType, FC } from 'react';
-import { FoundationTile, Foundations } from 'nhex-redux';
+import { FoundationArmyTile, Foundations } from 'nhex-redux';
 
 import { SQRT3 } from '../../../constants';
 import { FoundationProps } from '../../../types';
@@ -7,15 +7,14 @@ import { FoundationProps } from '../../../types';
 import { Hex, Mine } from '../';
 
 interface Props {
-  color: string,
   margin?: number
-  tile: FoundationTile
+  tile: FoundationArmyTile
   width: number
 }
 
 const TileFoundation: FC<Props> = (props) => {
-  const { color, margin = 10, tile, width } = props;
-  const { foundationType } = tile;
+  const { margin = 10, tile, width } = props;
+  const { color, foundationType } = tile;
   const Icon = getFoundationIcon();
 
   const height = SQRT3 * width;
