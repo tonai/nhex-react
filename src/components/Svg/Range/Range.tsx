@@ -18,6 +18,7 @@ const Range: FC<Props> = (props) => {
       <path 
         d={`M${width + width / 8 - 3},0 L${width},${width / 2 - 9} ${width - width / 8 + 3},0`}
         stroke="white"
+        strokeLinejoin="miter"
         strokeWidth="2"
         style={style}
       />

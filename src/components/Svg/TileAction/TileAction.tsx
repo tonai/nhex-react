@@ -3,7 +3,7 @@ import { ActionArmyTile, ActionTiles } from 'nhex-redux';
 
 import { IconProps } from '../../../types';
 
-import { Battle, Hex, Move, PushBack, Sniper } from '../';
+import { Battle, Castling, Hex, Move, PushBack, Rotation, Sniper, Terror } from '../';
 
 interface Props {
   margin?: number
@@ -38,14 +38,23 @@ const TileAction: FC<Props> = (props) => {
       case ActionTiles.Battle:
         return Battle;
 
+      case ActionTiles.Castling:
+        return Castling;
+
       case ActionTiles.Move:
         return Move;
 
       case ActionTiles.PushBack:
         return PushBack;
 
+      case ActionTiles.Rotation:
+        return Rotation;
+
       case ActionTiles.Sniper:
         return Sniper;
+
+      case ActionTiles.Terror:
+        return Terror;
 
       default:
         return null

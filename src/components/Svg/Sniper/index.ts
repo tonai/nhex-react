@@ -1,1 +1,1 @@
-export { default as  Sniper } from './Sniper';
+export { default as Sniper } from './Sniper';

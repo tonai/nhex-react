@@ -11,11 +11,11 @@ const GamePage: FC<Props> = () => {
   const margin = 10;
 
   const board = [
-    [vegasArmy.deck[28], vegasArmy.deck[16], smartArmy.deck[15]],
+    [vegasArmy.deck[11], vegasArmy.deck[16], smartArmy.deck[15]],
     [vegasArmy.deck[0], smartArmy.deck[18], smartArmy.hq, smartArmy.deck[30]],
-    [smartArmy.deck[22], vegasArmy.deck[29], smartArmy.deck[20], vegasArmy.deck[8], smartArmy.deck[13]],
+    [smartArmy.deck[22], vegasArmy.deck[29], smartArmy.deck[20], vegasArmy.deck[5], smartArmy.deck[13]],
     [vegasArmy.deck[32], vegasArmy.deck[13], smartArmy.deck[25], vegasArmy.deck[25]],
-    [smartArmy.deck[12], smartArmy.deck[26], smartArmy.deck[33]]
+    [smartArmy.deck[10], smartArmy.deck[26], smartArmy.deck[33]]
   ];
 
   const tiles = board.map(colData => colData.map(renderTile));
@@ -33,11 +33,11 @@ const GamePage: FC<Props> = () => {
     }
 
     switch(tile.type) {
-      case TileTypes.Foundation:
-        return (<TileFoundation margin={margin} tile={tile} width={width}/>);
-
       case TileTypes.Action:
         return (<TileAction tile={tile} width={width}/>);
+
+      case TileTypes.Foundation:
+        return (<TileFoundation margin={margin} tile={tile} width={width}/>);
 
       case TileTypes.HQ:
         return (<TileHQ margin={margin} tile={tile} width={width}/>);
