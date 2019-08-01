@@ -1,7 +1,7 @@
+import { Armies, smartArmy, Tile as TileType, TileTypes, vegasArmy } from 'nhex-redux';
 import React, { FC } from 'react';
-import { Armies, Tile as TileType, TileTypes, smartArmy, vegasArmy } from 'nhex-redux';
 
-import { Board, Clips, Tile, TileAction, TileFoundation } from '../../components';
+import { Board, Clips, TileAction, TileFoundation, TileHQ, TileModule, TileSoldier } from '../../components';
 
 interface Props {
 }
@@ -30,14 +30,27 @@ const GamePage: FC<Props> = () => {
   function renderTile(tile: TileType | null) {
     if (!tile) {
       return null;
-    } else if (tile.tileType === TileTypes.Foundation) {
-      return <TileFoundation color={getArmyColor(tile.army)} margin={margin} tile={tile} width={width}/>;
-    } else if (tile.tileType === TileTypes.Action) {
-      return <TileAction tile={tile} width={width}/>;
     }
-    return (
-      <Tile color={getArmyColor(tile.army)} margin={margin} tile={tile} width={width}/>
-    );
+
+    switch(tile.tileType) {
+      case TileTypes.Foundation:
+        return (<TileFoundation color={getArmyColor(tile.army)} margin={margin} tile={tile} width={width}/>);
+
+      case TileTypes.Action:
+        return (<TileAction tile={tile} width={width}/>);
+
+      case TileTypes.HQ:
+        return (<TileHQ color={getArmyColor(tile.army)} margin={margin} tile={tile} width={width}/>);
+
+      case TileTypes.Module:
+        return (<TileModule color={getArmyColor(tile.army)} margin={margin} tile={tile} width={width}/>);
+
+      case TileTypes.Soldier:
+        return (<TileSoldier color={getArmyColor(tile.army)} margin={margin} tile={tile} width={width}/>);
+
+      default:
+        return null;
+    }
   }
 
   function getArmyColor(army: Armies) {
