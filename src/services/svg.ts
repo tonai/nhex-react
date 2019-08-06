@@ -1,12 +1,16 @@
 import { getArray } from './utils';
 
+export function getCirclePoint(radius: number, angle: number = 0) {
+  const x = radius * Math.sin(angle);
+  const y = radius * Math.cos(angle);
+  return `${x},${y}`;
+}
+
 export function createCirclePoint(radius: number, length: number, offset: number = 0) {
   return function(index: number) {
     const angle = 2 * offset * Math.PI / length + 2 * Math.PI / length * index;
-    const x = radius * Math.sin(angle);
-    const y = radius * Math.cos(angle);
-    return `${x},${y}`;
-  }
+    return getCirclePoint(radius, angle);
+  };
 }
 
 export function getStarPath(outerRadius: number, innerRadius: number, length: number) {

@@ -9,6 +9,7 @@ interface Props extends IconProps {
 const Terror: FC<Props> = (props) => {
   const { color = 'white', width } = props;
   const circle = createCirclePath(12, 12);
+  const l = 1.5;
 
   return (
     <svg viewBox="0 0 24 24" width={width}>
@@ -17,8 +18,51 @@ const Terror: FC<Props> = (props) => {
         fill={color}
         fillRule="evenodd"
       />
+      <path
+        d={getRect(7)}
+        fill={color}
+      />
+      <path
+        d={getRect(7)}
+        fill={color}
+        style={{ transform: 'rotateZ(180deg)', transformOrigin: '12px 12px' }}
+      />
+      <path
+        d={getRect(4)}
+        fill={color}
+        style={{ transform: 'rotateZ(90deg)', transformOrigin: '12px 12px' }}
+      />
+      <path
+        d={getRect(4)}
+        fill={color}
+        style={{ transform: 'rotateZ(270deg)', transformOrigin: '12px 12px' }}
+      />
+      <path
+        d={getRect(6)}
+        fill={color}
+        style={{ transform: 'rotateZ(45deg)', transformOrigin: '12px 12px' }}
+      />
+      <path
+        d={getRect(6)}
+        fill={color}
+        style={{ transform: 'rotateZ(225deg)', transformOrigin: '12px 12px' }}
+      />
+      <path
+        d={getRect(6)}
+        fill={color}
+        style={{ transform: 'rotateZ(135deg)', transformOrigin: '12px 12px' }}
+      />
+      <path
+        d={getRect(6)}
+        fill={color}
+        style={{ transform: 'rotateZ(315deg)', transformOrigin: '12px 12px' }}
+      />
     </svg>
   );
+
+  function getRect(L: number) {
+    return `M${12 + l / 2},1 v${L} h${-l} v-${L} Z`
+  }
 };
 
 export default Terror;
