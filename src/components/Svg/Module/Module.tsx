@@ -45,7 +45,7 @@ const Module: FC<Props> = (props) => {
           y={cy - 1}
         >{text}</text>
       )}
-      {Icon && (
+      {!text && Icon && (
         <Icon color={color} cx={cx} cy={cy} width={width}/>
       )}
     </>

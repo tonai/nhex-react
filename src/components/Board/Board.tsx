@@ -1,23 +1,24 @@
-import React, { ReactNode, FC } from 'react';
+import React, { FC } from 'react';
+import { BoardArmyTile } from 'nhex-redux';
 
 import { getArray } from '../../services';
 
-import { Cell } from '../Cell';
+import { Cell, Tile } from '../';
 
 import './styles.css';
 
 interface Props {
+  board?: BoardArmyTile[][]
   cols: number
   hex?: boolean
   margin?: number
   oddEven?: boolean
   rows?: number
-  tiles?: ReactNode[][]
   width: number
 }
 
 const Board: FC<Props> = (props) => {
-  let { cols, hex = false, margin = 0, oddEven = false, rows, tiles, width } = props;
+  let { board, cols, hex = false, margin = 0, oddEven = false, rows, width } = props;
   cols = hex && cols % 2 === 0 ? cols - 1 : cols;
   rows = hex
     ? cols % 4 === 1 ? cols : cols + 1
@@ -65,8 +66,8 @@ const Board: FC<Props> = (props) => {
       row
     );
 
-    if (tiles && tiles[col] && tiles[col][tileRow]) {
-      return (<Cell width={width}>{tiles[col][tileRow]}</Cell>);
+    if (board && board[col] && board[col][tileRow]) {
+      return (<Tile margin={margin} tile={board[col][tileRow]} width={width}/>);
     }
 
     return (<Cell width={width}/>);
