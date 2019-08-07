@@ -6,31 +6,25 @@ import { IconProps } from '../../../types';
 import { Battle, Castling, Hex, Move, PushBack, Rotation, Sniper, Terror } from '../';
 
 interface Props {
-  margin?: number
   tile: ActionArmyTile
   width: number
 }
 
 const TileAction: FC<Props> = (props) => {
-  const { margin = 0, tile, width } = props;
+  const { tile, width } = props;
   const { actionType, color } = tile;
   const Icon = getActionIcon();
-  const w = width - margin;
-
-  const rootStyles = {
-    transform: `translateX(${margin}px)`,
-  };
+  const w = 3 * width / 4;
 
   return (
-    <g style={rootStyles}>
-      <Hex base color={color} width={w}>
-        {Icon && (
-          <g style={{ transform: `translateX(${w / 4}px)` }}>
-            <Icon color="black" width={3 * w / 2}/>
-          </g>
-        )}
-      </Hex>
-    </g>
+    <>
+      <Hex color={color} width={width}/>
+      {Icon && (
+        <g style={{ transform: `translateX(${width - w}px)` }}>
+          <Icon color="black" width={w * 2}/>
+        </g>
+      )}
+    </>
   );
 
   function getActionIcon(): ComponentType<IconProps> | null {

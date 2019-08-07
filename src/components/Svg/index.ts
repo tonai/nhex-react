@@ -26,6 +26,7 @@ export * from './Rotation';
 export * from './Saboteur';
 export * from './Scout';
 export * from './Sniper';
+export * from './Svg';
 export * from './Terror';
 export * from './TileAction';
 export * from './TileFoundation';

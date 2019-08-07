@@ -3,7 +3,7 @@ import { BoardArmyTile } from 'nhex-redux';
 
 import { getArray } from '../../services';
 
-import { Cell, Tile } from '../';
+import { Hex, Svg, Tile } from '../';
 
 import './styles.css';
 
@@ -70,7 +70,11 @@ const Board: FC<Props> = (props) => {
       return (<Tile margin={margin} tile={board[col][tileRow]} width={width}/>);
     }
 
-    return (<Cell width={width}/>);
+    return (
+      <Svg root width={width}>
+        <Hex color="black" width={width}/>
+      </Svg>
+    );
   }
 
   function isEmptyCell(col: number, row: number, length: number): boolean {

@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { gameInit, Armies, AppState, GameState } from 'nhex-redux';
 
-import { Board, Clips, Hand } from '../../components';
+import { Board, Clips, DragArea, Hand } from '../../components';
 
 interface Props {
   game: GameState
@@ -18,14 +18,12 @@ const GamePage: FC<Props> = (props) => {
     gameInit([Armies.Smart, Armies.Vegas]);
   }, [gameInit]);
   return (
-    <div className="GamePage">
+    <DragArea>
       <Clips margin={10} width={width}/>
       <Board board={game.board} cols={5} hex margin={margin} width={width}/>
       <Hand hand={game.playerHand} margin={margin} width={width}/>
-    </div>
+    </DragArea>
   );
-
-
 };
 
 const mapStateToProps = (state: AppState) => ({

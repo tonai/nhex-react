@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { ArmyTile, TileTypes } from 'nhex-redux';
 
-import { Cell, TileAction, TileFoundation, TileHQ, TileModule, TileSoldier } from '../';
+import { Hex, Svg, TileAction, TileFoundation, TileHQ, TileModule, TileSoldier, dragContext } from '../';
+import { SQRT3 } from '../../constants';
 
-interface Props {
+interface Props{
   margin: number
   tile: ArmyTile | null
   width: number
@@ -11,33 +12,48 @@ interface Props {
 
 const Tile: FC<Props> = (props) => {
   const { margin, tile, width } = props;
-
+  const { onPointerDown } = useContext(dragContext);
   if (tile === null) {
     return null;
   }
 
+  const direction = tile.direction || 0;
+  const height = SQRT3 * width;
+  const w = width - margin;
+
+  const rootStyles = {
+    cursor: 'grab',
+    transform: `rotateZ(${direction * Math.PI / 3}rad) translateX(${margin}px)`,
+    transformOrigin: `${width}px ${height / 2}px`
+  };
+
   return (
-    <Cell width={width}>
-      {renderTile(tile)}
-    </Cell>
+    <Svg root width={width}>
+      <Hex color="black" width={width}/>
+      <g onPointerDown={onPointerDown} style={rootStyles}>
+        <Svg width={w}>
+          {renderTile(tile)}
+        </Svg>
+      </g>
+    </Svg>
   );
 
   function renderTile(tile: ArmyTile) {
     switch(tile.type) {
       case TileTypes.Action:
-        return (<TileAction tile={tile} width={width}/>);
+        return (<TileAction tile={tile} width={w}/>);
 
       case TileTypes.Foundation:
-        return (<TileFoundation margin={margin} tile={tile} width={width}/>);
+        return (<TileFoundation tile={tile} width={w}/>);
 
       case TileTypes.HQ:
-        return (<TileHQ margin={margin} tile={tile} width={width}/>);
+        return (<TileHQ tile={tile} width={w}/>);
 
       case TileTypes.Module:
-        return (<TileModule margin={margin} tile={tile} width={width}/>);
+        return (<TileModule tile={tile} width={w}/>);
 
       case TileTypes.Soldier:
-        return (<TileSoldier margin={margin} tile={tile} width={width}/>);
+        return (<TileSoldier tile={tile} width={w}/>);
 
       default:
         return null;

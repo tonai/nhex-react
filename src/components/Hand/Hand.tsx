@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { ArmyTile } from 'nhex-redux';
-import { Tile } from '../index';
+
+import { Drag, Tile } from '../';
 
 interface Props {
   hand: ArmyTile[]
@@ -15,7 +16,13 @@ const Hand: FC<Props> = (props) => {
   return (
     <div className="Hand">
       {hand.map((tile, index) => (
-        <Tile key={index} margin={margin} tile={tile} width={width}/>
+        <Drag key={index} listener={false}>
+          <Tile
+            margin={margin}
+            tile={tile}
+            width={width}
+          />
+        </Drag>
       ))}
     </div>
   );

@@ -1,0 +1,7 @@
+.Drag {
+  display: inline-block;
+}
+
+.Drag.active {
+  cursor: grab;
+}
