@@ -1,20 +1,18 @@
 import React, { FC, ReactNode, createContext, useEffect, useMemo, useState, PointerEvent } from 'react';
 import classnames from 'classnames';
 
+import { Position } from '../../../types';
+
 import './styles.css';
 
-interface Position {
-  left: number
-  top: number
-}
-
-type StartFn = (pageX: number, pageY: number, offsetLeft: number, offsetTop: number, children: ReactNode) => void;
+type StartFn = (pageX: number, pageY: number, ref: HTMLElement, children: ReactNode) => void;
 export interface DragContext {
   drag: ReactNode
   start?: StartFn
 }
 
 export const dragAreaContext = createContext<DragContext>({ drag: null });
+export const dragPositionContext = createContext<Position>({ left: 0, top: 0 });
 
 const DragArea: FC<{}> = (props) => {
   const { children } = props;
@@ -23,7 +21,8 @@ const DragArea: FC<{}> = (props) => {
   const [ offset, setOffset ] = useState<Position>({ left: 0, top: 0 });
   const [ drag, setDrag ] = useState<ReactNode>(null);
 
-  const start: StartFn = (pageX, pageY, offsetLeft, offsetTop, children) => {
+  const start: StartFn = (pageX, pageY, ref, children) => {
+   const { offsetLeft, offsetTop } = ref;
     setPosition({
       left: pageX,
       top: pageY
@@ -34,6 +33,7 @@ const DragArea: FC<{}> = (props) => {
     });
     setDrag(children);
   };
+
   const context = useMemo(() => ({ drag, start }), [drag]);
   const dragging = Boolean(drag);
 
@@ -67,17 +67,19 @@ const DragArea: FC<{}> = (props) => {
   return (
     <div className={classnames('DragArea', { dragging })}>
       <dragAreaContext.Provider value={context}>
-        {children}
-        {dragging && (
-          <div className="DragArea__item" style={{
-            left: -offset.left,
-            top: -offset.top,
-            transform: `translateX(${position.left}px) translateY(${position.top}px)`
-          }}>
-            {drag}
-          </div>
-        )}
+        <dragPositionContext.Provider value={position}>
+          {children}
+        </dragPositionContext.Provider>
       </dragAreaContext.Provider>
+      {dragging && (
+        <div className="DragArea__item" style={{
+          left: -offset.left,
+          top: -offset.top,
+          transform: `translateX(${position.left}px) translateY(${position.top}px)`
+        }}>
+          {drag}
+        </div>
+      )}
     </div>
   );
 };

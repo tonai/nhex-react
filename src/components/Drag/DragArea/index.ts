@@ -1,1 +1,1 @@
-export { default as DragArea, dragAreaContext } from './DragArea';
+export { default as DragArea, dragAreaContext, dragPositionContext } from './DragArea';

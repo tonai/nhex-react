@@ -3,7 +3,7 @@ import { BoardArmyTile } from 'nhex-redux';
 
 import { getArray } from '../../services';
 
-import { Hex, Svg, Tile } from '../';
+import { Cell, Drop, Svg, Tile } from '../';
 
 import './styles.css';
 
@@ -71,9 +71,11 @@ const Board: FC<Props> = (props) => {
     }
 
     return (
-      <Svg root width={width}>
-        <Hex color="black" width={width}/>
-      </Svg>
+      <Drop>
+        <Svg root width={width}>
+          <Cell width={width}/>
+        </Svg>
+      </Drop>
     );
   }
 

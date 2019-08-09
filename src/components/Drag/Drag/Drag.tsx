@@ -26,7 +26,7 @@ const Drag: FC<Props> = (props) => {
   const onPointerDown: OnPointerDownFn = (event: PointerEvent<Element>) => {
     const { pageX, pageY } = event;
     if (active && !dragging && ref.current && start) {
-      start(pageX, pageY, ref.current.offsetLeft, ref.current.offsetTop, children);
+      start(pageX, pageY, ref.current, children);
     }
   };
   const dragging = drag === children;
