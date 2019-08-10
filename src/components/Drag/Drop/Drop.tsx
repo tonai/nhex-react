@@ -1,8 +1,6 @@
-import React, { createContext, FC, useContext, useEffect, useRef } from 'react';
+import React, { createContext, FC, useRef } from 'react';
 
-import { isHover } from '../../../services';
-
-import { dragAreaContext, dragPositionContext } from '../DragArea';
+import { useDrop } from './useDrop';
 
 interface Props {
   onDrop?: (data?: any) => void
@@ -11,21 +9,13 @@ export const dropContext = createContext<boolean>(false);
 
 const Drop: FC < Props > = (props) => {
   const { children, onDrop } = props;
-  const { data, drag } = useContext(dragAreaContext);
-  const position = useContext(dragPositionContext);
-  const ref = useRef<HTMLDivElement>(null);
-  const hover = isHover(ref.current, position);
-  const dragging = Boolean(drag);
 
-  useEffect(() => {
-    if (!dragging && hover && onDrop) {
-      onDrop(data);
-    }
-  }, [data, dragging, hover, onDrop]);
+  const ref = useRef<HTMLDivElement>(null);
+  const [ isHover ] = useDrop(ref, onDrop);
 
   return (
     <div className="Drop" ref={ref}>
-      <dropContext.Provider value={hover}>
+      <dropContext.Provider value={isHover}>
         {children}
       </dropContext.Provider>
     </div>

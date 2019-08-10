@@ -1,7 +1,7 @@
-import React, { CSSProperties, FC, PointerEvent, createContext, useContext, useRef } from 'react';
+import React, { CSSProperties, FC, PointerEvent, createContext, useRef } from 'react';
 import classnames from 'classnames';
 
-import { dragAreaContext } from '../DragArea';
+import { useDrag } from './useDrag';
 
 import './styles.css';
 
@@ -21,16 +21,15 @@ export const dragContext = createContext<DragContext>({});
 
 const Drag: FC<Props> = (props) => {
   const { active = true, children, data, listener = true, style = {} } = props;
-  const { drag, start } = useContext(dragAreaContext);
+  
   const ref = useRef<HTMLDivElement>(null);
-
+  const [ dragging, onStart ] = useDrag(ref, children);
   const onPointerDown: OnPointerDownFn = (event: PointerEvent<Element>) => {
     const { pageX, pageY } = event;
-    if (active && !dragging && ref.current && start) {
-      start(pageX, pageY, ref.current, children, data);
+    if (active) {
+      onStart(pageX, pageY, data);
     }
   };
-  const dragging = drag === children;
 
   const computedStyle = dragging && ref.current ? {
     height: ref.current.offsetHeight,

@@ -69,7 +69,7 @@ const Board: FC<Props> = (props) => {
     );
 
     if (board && board[col] && board[col][tileRow]) {
-      return (<Tile margin={margin} tile={board[col][tileRow]} width={width}/>);
+      return (<Tile margin={margin} tile={board[col][tileRow] as BoardArmyTile} width={width}/>);
     }
 
     return (
