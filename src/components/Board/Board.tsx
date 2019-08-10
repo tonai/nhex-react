@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { BoardArmyTile } from 'nhex-redux';
+import { connect } from 'react-redux';
+import { BoardArmyTile, gameTileDrop } from 'nhex-redux';
 
 import { getArray } from '../../services';
 
@@ -8,8 +9,9 @@ import { Cell, Drop, Svg, Tile } from '../';
 import './styles.css';
 
 interface Props {
-  board?: BoardArmyTile[][]
+  board?: (BoardArmyTile | null)[][]
   cols: number
+  gameTileDrop: typeof gameTileDrop
   hex?: boolean
   margin?: number
   oddEven?: boolean
@@ -18,7 +20,7 @@ interface Props {
 }
 
 const Board: FC<Props> = (props) => {
-  let { board, cols, hex = false, margin = 0, oddEven = false, rows, width } = props;
+  let { board, cols, gameTileDrop, hex = false, margin = 0, oddEven = false, rows, width } = props;
   cols = hex && cols % 2 === 0 ? cols - 1 : cols;
   rows = hex
     ? cols % 4 === 1 ? cols : cols + 1
@@ -71,7 +73,7 @@ const Board: FC<Props> = (props) => {
     }
 
     return (
-      <Drop>
+      <Drop onDrop={getOnDrop(col, tileRow)}>
         <Svg root width={width}>
           <Cell width={width}/>
         </Svg>
@@ -92,6 +94,16 @@ const Board: FC<Props> = (props) => {
     const midRow = (length + 1) / 2 - 1;
     return Math.abs(row - midRow) > cellLength / 2;
   }
+
+  function getOnDrop(col: number, row: number) {
+    return function (data: any) {
+      gameTileDrop(col, row, data as BoardArmyTile);
+    }
+  }
 };
 
-export default Board;
+const mapDispatchToProps = {
+  gameTileDrop
+};
+
+export default connect(null, mapDispatchToProps)(Board);

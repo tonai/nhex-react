@@ -7,6 +7,7 @@ import './styles.css';
 
 interface Props {
   active?: boolean
+  data?: any
   listener?: boolean
   style?: CSSProperties
 }
@@ -19,14 +20,14 @@ export interface DragContext {
 export const dragContext = createContext<DragContext>({});
 
 const Drag: FC<Props> = (props) => {
-  const { active = true, children, listener = true, style = {} } = props;
+  const { active = true, children, data, listener = true, style = {} } = props;
   const { drag, start } = useContext(dragAreaContext);
   const ref = useRef<HTMLDivElement>(null);
 
   const onPointerDown: OnPointerDownFn = (event: PointerEvent<Element>) => {
     const { pageX, pageY } = event;
     if (active && !dragging && ref.current && start) {
-      start(pageX, pageY, ref.current, children);
+      start(pageX, pageY, ref.current, children, data);
     }
   };
   const dragging = drag === children;

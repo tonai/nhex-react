@@ -16,7 +16,7 @@ const Hand: FC<Props> = (props) => {
   return (
     <div className="Hand">
       {hand.map((tile, index) => (
-        <Drag key={index} listener={false}>
+        <Drag data={tile} key={index} listener={false}>
           <Tile
             margin={margin}
             tile={tile}

@@ -5,8 +5,9 @@ import { Position } from '../../../types';
 
 import './styles.css';
 
-type StartFn = (pageX: number, pageY: number, ref: HTMLElement, children: ReactNode) => void;
+type StartFn = (pageX: number, pageY: number, ref: HTMLElement, children: ReactNode, data?: any) => void;
 export interface DragContext {
+  data?: any
   drag: ReactNode
   start?: StartFn
 }
@@ -20,8 +21,9 @@ const DragArea: FC<{}> = (props) => {
   const [ position, setPosition ] = useState<Position>({ left: 0, top: 0 });
   const [ offset, setOffset ] = useState<Position>({ left: 0, top: 0 });
   const [ drag, setDrag ] = useState<ReactNode>(null);
+  const [ data, setData ] = useState<any>();
 
-  const start: StartFn = (pageX, pageY, ref, children) => {
+  const start: StartFn = (pageX, pageY, ref, children, data) => {
    const { offsetLeft, offsetTop } = ref;
     setPosition({
       left: pageX,
@@ -32,9 +34,10 @@ const DragArea: FC<{}> = (props) => {
       top: pageY - offsetTop
     });
     setDrag(children);
+    setData(data);
   };
 
-  const context = useMemo(() => ({ drag, start }), [drag]);
+  const context = useMemo(() => ({ data, drag, start }), [data, drag]);
   const dragging = Boolean(drag);
 
   useEffect(() => {
