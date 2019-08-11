@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { BoardArmyTile, gameTileDrop } from 'nhex-redux';
 
-import { getArray } from '../../services';
+import { getArray, isInsideHex } from '../../services';
 
 import { Cell, Drop, Svg, Tile } from '../';
 
@@ -73,7 +73,7 @@ const Board: FC<Props> = (props) => {
     }
 
     return (
-      <Drop onDrop={getOnDrop(col, tileRow)}>
+      <Drop onDrop={getOnDrop(col, tileRow)} testFn={isInsideHex}>
         <Svg root width={width}>
           <Cell width={width}/>
         </Svg>

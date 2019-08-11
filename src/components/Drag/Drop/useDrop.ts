@@ -1,13 +1,14 @@
 import { useContext, useEffect, RefObject } from 'react';
 
-import { isHover } from '../../../services';
+import { isInsideSquare } from '../../../services';
+import { TestFn } from '../../../types';
 
 import { dragAreaContext, dragPositionContext } from '../DragArea';
 
-export function useDrop(ref: RefObject<HTMLElement> | null, onDrop?: (data?: any) => void): [ boolean ] {
+export function useDrop(ref: RefObject<HTMLElement> | null, onDrop?: (data?: any) => void, testFn: TestFn = isInsideSquare): [ boolean ] {
   const { data, drag } = useContext(dragAreaContext);
   const position = useContext(dragPositionContext);
-  const hover = ref ? isHover(ref.current, position) : false;
+  const hover = ref ? testFn(ref.current, position) : false;
   const dragging = Boolean(drag);
 
   useEffect(() => {
