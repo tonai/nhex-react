@@ -22,7 +22,7 @@ const Tile: FC<Props> = (props) => {
   const w = width - margin;
 
   const rootStyles = {
-    cursor: 'grab',
+    cursor: onPointerDown ? 'grab' : 'inherit',
     transform: `rotateZ(${direction * Math.PI / 3}rad) translateX(${margin}px)`,
     transformOrigin: `${width}px ${height / 2}px`
   };
