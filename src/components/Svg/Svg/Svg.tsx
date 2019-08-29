@@ -16,7 +16,7 @@ const Svg: FC<Props> = (props) => {
   const h = SQRT3 * width;
 
   return (
-    <svg className={classnames({ Svg: root })} viewBox={`0 0 ${w} ${h}`} width={w}>
+    <svg className={classnames({ Svg: root })} viewBox={`0 0 ${w} ${h}`} width={w} height={h}>
       {children}
     </svg>
   );

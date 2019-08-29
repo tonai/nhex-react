@@ -20,10 +20,11 @@ const Tile: FC<Props> = (props) => {
   const direction = tile.direction || 0;
   const height = SQRT3 * width;
   const w = width - margin;
+  const h = SQRT3 * w;
 
   const rootStyles = {
     cursor: onPointerDown ? 'grab' : 'inherit',
-    transform: `rotateZ(${direction * Math.PI / 3}rad) translateX(${margin}px)`,
+    transform: `rotateZ(${direction * Math.PI / 3}rad) translateX(${margin}px) translateY(${(height - h) / 2}px)`,
     transformOrigin: `${width}px ${height / 2}px`
   };
 
