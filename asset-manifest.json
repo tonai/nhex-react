@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/nhex-react/static/css/main.5b436679.chunk.css",
+    "main.js": "/nhex-react/static/js/main.e95d6e0e.chunk.js",
+    "main.js.map": "/nhex-react/static/js/main.e95d6e0e.chunk.js.map",
+    "runtime-main.js": "/nhex-react/static/js/runtime-main.b828186f.js",
+    "runtime-main.js.map": "/nhex-react/static/js/runtime-main.b828186f.js.map",
+    "static/js/2.9f8c232d.chunk.js": "/nhex-react/static/js/2.9f8c232d.chunk.js",
+    "static/js/2.9f8c232d.chunk.js.map": "/nhex-react/static/js/2.9f8c232d.chunk.js.map",
+    "index.html": "/nhex-react/index.html",
+    "static/css/main.5b436679.chunk.css.map": "/nhex-react/static/css/main.5b436679.chunk.css.map",
+    "static/js/2.9f8c232d.chunk.js.LICENSE.txt": "/nhex-react/static/js/2.9f8c232d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b828186f.js",
+    "static/js/2.9f8c232d.chunk.js",
+    "static/css/main.5b436679.chunk.css",
+    "static/js/main.e95d6e0e.chunk.js"
+  ]
+}
