@@ -1,4 +1,4 @@
-import React, { ComponentType, FC } from 'react';
+import React, { FC } from 'react';
 import { ActionArmyTile, ActionTiles } from 'nhex-redux';
 
 import { IconProps } from '../../../types';
@@ -27,7 +27,7 @@ const TileAction: FC<Props> = (props) => {
     </>
   );
 
-  function getActionIcon(): ComponentType<IconProps> | null {
+  function getActionIcon(): FC<IconProps> | null {
     switch(actionType) {
       case ActionTiles.Battle:
         return Battle;

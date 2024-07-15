@@ -1,10 +1,10 @@
-import React, { ComponentType, CSSProperties, FC } from 'react';
+import React, { CSSProperties, FC } from 'react';
 
 import { SQRT3 } from '../../../constants';
 import { IconProps, SvgProps } from '../../../types';
 
 interface Props {
-  Icon?: ComponentType<IconProps>
+  Icon?: FC<IconProps>
   color?: string
   iconProps?: Partial<SvgProps>
   position?: number

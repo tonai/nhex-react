@@ -1,4 +1,4 @@
-import React, { ComponentType, FC } from 'react';
+import React, { FC } from 'react';
 
 import { SQRT3 } from '../../../constants';
 import { getArray, modulo } from '../../../services';
@@ -9,7 +9,7 @@ import { Dir } from '../Dir';
 type boolOrNum = boolean | number;
 
 interface Props {
-  Component: ComponentType<SvgProps>
+  Component: FC<SvgProps>
   data?: [boolOrNum, boolOrNum, boolOrNum, boolOrNum, boolOrNum, boolOrNum]
   margin?: number
   width: number

@@ -1,4 +1,4 @@
-import React, { ComponentType, FC } from 'react';
+import React, { FC } from 'react';
 import { FoundationArmyTile, Foundations } from 'nhex-redux';
 
 import { SQRT3 } from '../../../constants';
@@ -24,7 +24,7 @@ const TileFoundation: FC<Props> = (props) => {
     </>
   );
 
-  function getFoundationIcon(): ComponentType<FoundationProps> | null {
+  function getFoundationIcon(): FC<FoundationProps> | null {
     switch(foundationType) {
       case Foundations.Mine:
         return Mine;
