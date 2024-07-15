@@ -2,6 +2,8 @@
 
 ## Demo
 
+Live demo can be found [here](https://tonai.github.io/nhex-react/).
+
 ## Getting Started
 
 First you need to install [Node](https://nodejs.org/fr) v12.

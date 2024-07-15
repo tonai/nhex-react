@@ -2,6 +2,7 @@
   "name": "nhex-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tonai.github.io/nhex-react",
   "dependencies": {
     "@types/classnames": "^2.2.9",
     "classnames": "^2.2.6",
@@ -15,6 +16,7 @@
     "@types/react": "17.x",
     "@types/react-dom": "17.x",
     "@types/react-redux": "7.x",
+    "gh-pages": "^6.1.1",
     "react-scripts": "4.x",
     "typescript": "4.9.3"
   },
@@ -22,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
